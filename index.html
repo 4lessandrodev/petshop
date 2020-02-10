@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description"
+      content="Projeto desenvolvido para praticar o aprendizado do curso de fullstack na digital house, javascript, html5, css, bootstrap">
+    <meta name="author" content="Alessandro Lima de Menezes - alessandroadm@live.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="https://kit.fontawesome.com/8701d44bdc.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="background">
+    <header>
+
+      <div id="carrocel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100 banner img-fluid" src="./images/7.jpg" alt="Primeiro Slide" id="slide">
+
+            <div class="text-block">
+              <h4 class="display-2 h4">PetShop</h4>
+              <p>Colocando em prática o curso Fullstack Digital House</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav container">
+
+        <div class="card-group">
+          <div class="card" onclick="exibirModal('#novoPet', true, '#formularioNovoPet', '#div-alert');">
+            <div class="card-icon"><i class="fas fa-paw"></i></div>
+            <div class="card-body">
+              <h5 class="card-title">Novo Pet</h5>
+              <p class="card-text">Cadastrar novo pet no sistema</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="exibirModal('#petsListagem');">
+            <div class="card-icon"><i class="fas fa-cat"></i></div>
+            <div class="card-body">
+              <h5 class="card-title">Listar Pets</h5>
+              <p class="card-text">Listar todos os pets cadastrados no sistema</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="exibirModal('#novoServico', true, '#formularioNovoServico','#div-alert-servico');">
+            <div class="card-icon"><i class="fas fa-sitemap"></i></div>
+            <div class="card-body">
+              <h5 class="card-title">Cadastrar Serviço</h5>
+              <p class="card-text">Cadastrar um serviço que pode ser realizado em um pet</p>
+            </div>
+          </div>
+
+          <div class="card" onclick="exibirModal('#realizarServico', true, '#formularioRealizarServico' )">
+            <div class="card-icon"><i class="fab fa-gratipay"></i></div>
+            <div class="card-body">
+              <h5 class="card-title">Realizar Serviço</h5>
+              <p class="card-text">Lançar um serviço realizado em um determinado pet</p>
+            </div>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <div class="modal fade" id="novoPet" tabindex="1" role="dialog" aria-labelledby="novoPetLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="novoPetLabel">Cadastrar Novo Pet</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="alert alert-warning alert-dismissible fade show hidden" role="alert" id="div-alert">
+                  <strong>Campo obrigatório</strong> <span id="mensagem"></span>
+                  <button type="button" class="close" data-dismiss="" aria-label="Close"
+                    onclick="closeAlert('#div-alert')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form id="formularioNovoPet">
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="pet-name">Nome</label>
+                      </div>
+                      <input type="text" class="form-control" id="pet-name" name="nome" required>
+                    </div>
+
+                    <label>Tipo de Pet: <span id="selectedPet" style="font-weight: bold;">Selecione</span></label>
+                    <div class="grupo-tipoDePets">
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipo" id="tipoDePet1" value="Gato" hidden
+                          required>
+                        <label class="form-check-label" for="tipoDePet1" onclick="atribuirLabelPetSelecionado(this)">
+                          <i class="fas fa-cat"></i></label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipo" id="tipoDePet2" value="Cachorro" hidden
+                          required>
+                        <label class="form-check-label" for="tipoDePet2" onclick="atribuirLabelPetSelecionado(this)">
+                          <i class="fas fa-dog"></i></label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="tipo" id="tipoDePet3" value="Passaro" hidden
+                          required>
+                        <label class="form-check-label" for="tipoDePet3" onclick="atribuirLabelPetSelecionado(this)">
+                          <i class="fas fa-dove"></i></label>
+                      </div>
+                    </div>
+
+                    <div class="grupo">
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="listaDeRacas">Raça</label>
+                        </div>
+                        <select class="custom-select" id="listaDeRacas" name="raca" required>
+                          <option disabled>Selecione um tipo acima</option>
+                          <!-- As opções são atribuidas dinamicamente via javascript-->
+                        </select>
+                      </div>
+                      <div>
+                      </div>
+                    </div>
+
+                    <div class="grupo">
+                      <label for="idadePet">Idade: <span id="idade" style="font-weight: bold;">Até 12
+                          meses</span></label>
+                      <input type="range" class="custom-range" min="1" max="10" step="0.5" id="idadePet"
+                        onchange="imprimirIdade(this)" value="1" name="idade" required>
+                    </div>
+
+
+                    <div class="grupo">
+                      <div class="row row-cols-6">
+                        <div class="col">
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="genero1" name="genero" class="custom-control-input" value="M"
+                              required>
+                            <label class="custom-control-label" for="genero1">Macho</label>
+                          </div>
+
+                          <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="genero2" name="genero" class="custom-control-input" value="F"
+                              required>
+                            <label class="custom-control-label" for="genero2">Fêmea</label>
+                          </div>
+                        </div>
+                        <div class="col-4">
+                          <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="vacinado" name="vacinado"
+                              value="true">
+                            <label class="custom-control-label" for="vacinado">Vacinado</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn-salvar-novo-pet">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="modal fade" id="novoServico" tabindex="2" role="dialog2" aria-labelledby="novoServicoLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document2">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="novoServicoLabel">Novo Serviço</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="alert alert-warning alert-dismissible fade show hidden" role="alert" id="div-alert-servico">
+                  <strong>Campo obrigatório</strong> <span id="mensagem-servico"></span>
+                  <button type="button" class="close" data-dismiss="" aria-label="Close"
+                    onclick="closeAlert('#div-alert-servico')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form id="formularioNovoServico">
+                  <div class="form-group">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="descricao">Descrição</label>
+                      </div>
+                      <input type="text" class="form-control" id="descricao" name="descricao" maxlength="20" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="preco">Preço</label>
+                      </div>
+                      <input type="number" class="form-control" id="preco" name="preco" max="1000" min="1" maxlength="4"
+                        onkeyup="validarValor(this)" required>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="btn-salvar-novo-servico">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="modal fade" id="realizarServico" tabindex="3" role="dialog3" aria-labelledby="realizarServicoLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document3">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="realizarServicoLabel">Realizar Serviço</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="alert alert-warning alert-dismissible fade show hidden" role="alert"
+                  id="div-alert-executar">
+                  <strong>Campo obrigatório</strong> <span id="mensagem-executar"></span>
+                  <button type="button" class="close" data-dismiss="" aria-label="Close"
+                    onclick="closeAlert('#div-alert-executar')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <form id="formularioRealizarServico">
+                  <div class="form-group">
+                    <label for="petsList">Pets Cadastrados</label>
+                    <select class="form-control" id="petsList" name="pet">
+                      <option disabled selected>Selecione</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="servicos">Serviços</label>
+                    <select multiple class="form-control" id="servicos" size="5" name="servico">
+                      <option disabled>Escolha um serviço</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="executar-servico">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="modal fade" id="petsListagem" tabindex="-1" role="dialog4" aria-labelledby="petsListagemTitulo"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document4">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="petsListagemTitulo">Lita de Pets</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table class="table table-bordered table-striped table-hover table-responsive-lg">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Tipo</th>
+                      <th scope="col">Raça</th>
+                      <th scope="col">Idade</th>
+                      <th scope="col">Genero</th>
+                      <th scope="col">Vacinado</th>
+                      <th scope="col">Serviços</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabelaPets">
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <script src="index.js" type="module"></script>
+    <script src="js/Utils.js"></script>
+    <script src="js/View.js"></script>
+  </body>
+
+
+</html>

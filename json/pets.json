@@ -1,0 +1,28 @@
+[{
+  "codigo": 1,
+  "nome": "Panda",
+  "raca": "SRD",
+  "idade": 3,
+  "genero": "M",
+  "servicos": [],
+  "tipo": "Gato",
+  "vacinado": true
+}, {
+  "codigo": 2,
+  "nome": "Quica",
+  "raca": "Arara",
+  "idade": 1,
+  "genero": "F",
+  "servicos": ["Hospedar"],
+  "tipo": "Passaro",
+  "vacinado": false
+}, {
+  "codigo": 3,
+  "nome": "Tarzam",
+  "raca": "Labrador",
+  "idade": 5,
+  "genero": "M",
+  "servicos": [],
+  "tipo": "Cachorro",
+  "vacinado": false
+}]

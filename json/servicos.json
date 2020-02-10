@@ -1,0 +1,29 @@
+[{
+  "codigo": 1,
+  "descricao": "Dar Banho",
+  "preco": 60.00
+}, {
+  "codigo": 2,
+  "descricao": "Tosar",
+  "preco": 40.00
+}, {
+  "codigo": 3,
+  "descricao": "Vermifugar",
+  "preco": 20.00
+}, {
+  "codigo": 4,
+  "descricao": "Vacinar",
+  "preco": 50.00
+}, {
+  "codigo": 5,
+  "descricao": "Castrar",
+  "preco": 180.00
+}, {
+  "codigo": 6,
+  "descricao": "Cortar as unhas",
+  "preco": 40.00
+}, {
+  "codigo": 7,
+  "descricao": "Hospedar",
+  "preco": 45.00
+}]
